@@ -1,0 +1,50 @@
+<p style="color: green"><%= notice %></p>
+
+<% content_for :title, "Items" %>
+
+<div class="flex-between">
+  <h1>Items</h1>
+  <%= link_to "New item", new_item_path %>
+</div>
+
+<div id="filters">
+  <%= form_with model: @categories.first do |form| %>
+    <fieldset>
+      <%= form.collection_radio_buttons :tag, @categories, :tag, :title %>
+    </fieldset>
+  <% end %>
+</div>
+
+<div id="items">
+  <% @items.each_slice(3) do |group| %>
+    <div class="grid">
+      <%= render group[0] %>
+
+      <% if group[1] %>
+        <%= render group[1] %>
+      <% else %>
+        <div></div>
+      <% end %>
+
+      <% if group[2] %>
+        <%= render group[2] %>
+      <% else %>
+        <div></div>
+      <% end %>
+    </div>
+  <% end %>
+</div>
+
+<script>
+  document.addEventListener('turbo:frame-load', (e) => {
+    const frameParent = e?.target?.parentElement;
+
+    if (frameParent instanceof HTMLDialogElement) {
+      frameParent.showModal();
+    }
+  })
+</script>
+<dialog id="popup-details">
+  <%= turbo_frame_tag 'item-details' do %>
+  <% end %>
+</dialog>

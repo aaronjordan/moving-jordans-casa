@@ -1,0 +1,184 @@
+/*
+ * This is a manifest file that'll be compiled into application.css.
+ *
+ * With Propshaft, assets are served efficiently without preprocessing steps. You can still include
+ * application-wide styles in this file, but keep in mind that CSS precedence will follow the standard
+ * cascading order, meaning styles declared later in the document or manifest will override earlier ones,
+ * depending on specificity.
+ *
+ * Consider organizing styles into separate files for maintainability.
+ */
+
+@import url("pico.colors.css");
+@import url("pico.pumpkin.css");
+
+/* PICOFIX */
+form button[type="submit"] {
+  width: unset;
+}
+
+/* RAILS TRIX */
+.trix-container {
+  color: var(--pico-color);
+}
+
+/* Extensions */
+.destructive,
+button[type="submit"].destructive {
+  --pico-primary-background: var(--pico-color-red-600);
+  --pico-border-color: var(--pico-color-red-650);
+  --pico-color: var(--pico-color-light);
+  --pico-primary-hover-background: var(--pico-color-red-500);
+  --pico-primary-hover-border: var(--pico-color-red-500);
+}
+
+.flex-left {
+  display: flex;
+  align-items: center;
+  gap: calc(0.5 * var(--pico-spacing));
+}
+
+.flex-left > * {
+  margin: 0;
+}
+
+.flex-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.tag {
+  display: inline-block;
+  font-weight: 700;
+  padding: 0.2rem 0.5rem;
+  font-size: 1rem;
+  border-radius: 1rem;
+}
+
+.tight,
+form input.tight {
+  margin: 0;
+}
+
+.mb {
+  margin-bottom: var(--pico-typography-spacing-vertical);
+}
+
+.ml {
+  margin-left: var(--pico-block-spacing-horizontal);
+}
+
+.mr {
+  margin-right: var(--pico-block-spacing-horizontal);
+}
+
+.mt {
+  margin-top: var(--pico-typography-spacing-vertical);
+}
+
+.img-preview {
+  display: inline-block;
+  position: relative;
+}
+
+.img-preview.can-delete:hover::after {
+  content: "delete image";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(175, 41, 29, 0.5);
+  color: var(--pico-color-light);
+  z-index: 1;
+  cursor: pointer;
+}
+
+.shop-card {
+  overflow: hidden;
+  position: relative;
+}
+
+.shop-card .cover {
+  aspect-ratio: 13 / 11;
+  object-fit: cover;
+  border-radius: var(--pico-border-radius);
+  margin-top: calc(0.25 * var(--pico-spacing));
+  transform: scale(1);
+  opacity: 0.9;
+  transition: transform 0.65s ease, opacity 0.6s ease-out;
+}
+
+.shop-card header {
+  margin-bottom: calc(0.5 * var(--pico-spacing));
+}
+
+.shop-card:hover .cover {
+  transform: scale(1.8) translateY(10%);
+  opacity: 0.3;
+}
+
+.shop-card .tag {
+  position: absolute;
+  z-index: 1;
+  top: var(--pico-spacing);
+  right: var(--pico-spacing);
+}
+
+.shop-card h3 {
+  position: relative;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-bottom: 0;
+}
+
+article.detail-view {
+  padding-top: 0;
+}
+
+.detail-view header {
+  padding: 0;
+}
+
+.detail-view button.icon {
+  display: inline-flex;
+  padding: calc(0.25 * var(--pico-spacing));
+  width: calc(2 * var(--pico-spacing));
+  border-radius: 100%;
+  color: white;
+  background: rgb(0 0 0 / 0);
+}
+
+.gallery-img {
+  aspect-ratio: 13 / 11;
+  object-fit: cover;
+  border-radius: var(--pico-border-radius);
+  margin-top: calc(0.25 * var(--pico-spacing));
+}
+
+.claim-controller {
+  margin-block: var(--pico-spacing);
+}
+
+.claim-controller button {
+  margin: 0;
+}
+
+.claim-controller .cost {
+  font-size: calc(1.5 * var(--pico-font-size));
+}
+
+.free {
+  font-weight: 700;
+}
+
+.subtle {
+  font-size: calc(0.7 * var(--pico-font-size));
+  font-style: italic;
+  opacity: 0.85;
+}

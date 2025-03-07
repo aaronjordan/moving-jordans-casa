@@ -1,0 +1,79 @@
+<%= form_with(model: item) do |form| %>
+  <% if item.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(item.errors.count, "error") %> prohibited this item from being saved:</h2>
+
+      <ul>
+        <% item.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <p>
+    <%= form.checkbox :draft, 
+        checked: item.draft.nil? ? true : item.draft %>
+    <%= form.label :draft %>
+  </p>
+
+  <div>
+    <%= form.label :title, style: "display: block" %>
+    <%= form.text_field :title %>
+  </div>
+
+  <div class="grid">
+    <article>
+      <h3>Cover Image</h3>
+      <% if item.cover_image.present? %>
+        <div class="img-preview mb" style="max-width: 300px">
+          <%= image_tag item.cover_image %>
+        </div>
+      <% else %>
+        <p class="ml">No image</p>
+      <% end %>
+      <%= form.file_field :cover_image, class: "tight" %>
+    </article>
+
+    <article class="mb">
+      <h3>Categories</h3>
+      <%= form.collection_checkboxes :categories, 
+        Category.order(:tag), :id, :title %>
+    </article>
+  </div>
+
+  <article>
+    <h3>Additional Images</h3>
+    <% item.images.each do |image| %>
+      <%# TODO ADD Click action to delete div %>
+      <div class="img-preview can-delete mb" style="max-width: 300px">
+        <%= form.hidden_field :images, multiple: true, value: image.signed_id %>
+        <%= image_tag image %>
+      </div>
+    <% end %>
+    <% if item.images.empty? %>
+      <p class="ml">No images</p>
+    <% end %>
+    <%= form.file_field :images, multiple: true, class: "tight" %>
+  </article>
+
+  <div class="grid">
+    <div>
+      <%= form.label :suggested_price, style: "display: block" %>
+      <%= form.text_field :suggested_price %>
+    </div>
+    <div>
+      <%= form.label :reserve_price, style: "display: block" %>
+      <%= form.text_field :reserve_price %>
+    </div>
+  </div>
+
+  <h3 class="tight mb"><%= form.label :desc, "Description" %></h3>
+  <article class="trix-container" data-theme="light">
+    <%= form.rich_textarea :desc %>
+  </article>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

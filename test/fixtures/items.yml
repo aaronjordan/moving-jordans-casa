@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  draft: false
+  suggested_price: 9.99
+  reserve_price: 9.99
+
+two:
+  title: MyString
+  draft: false
+  suggested_price: 9.99
+  reserve_price: 9.99
