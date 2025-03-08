@@ -1,0 +1,18 @@
+<p style="color: green"><%= notice %></p>
+
+<% content_for :title, "Events" %>
+
+<div class="flex-left mb">
+  <h1>Events</h1>
+  <%= link_to "Create New", new_event_path %>
+</div>
+
+<%# https://dribbble.com/shots/18706766-Evently-A-Calendar-UI-Exploration %>
+<div id="events">
+  <% @events.each do |event| %>
+    <%= render event %>
+    <p>
+      <%= link_to "Show this event", event %>
+    </p>
+  <% end %>
+</div>

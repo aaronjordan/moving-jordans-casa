@@ -1,6 +1,8 @@
 <article class="detail-view" id="<%= dom_id item %>">
   <header>
-    <%= image_tag item.cover_image, class: "gallery-img" %>
+    <% if item.cover_image %>
+      <%= image_tag item.cover_image, class: "gallery-img" %>
+    <% end%>
   </header>
   <section>
     <div class="flex-between">

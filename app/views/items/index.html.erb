@@ -2,36 +2,26 @@
 
 <% content_for :title, "Items" %>
 
-<div class="flex-between">
+<div class="flex-left mb">
   <h1>Items</h1>
-  <%= link_to "New item", new_item_path %>
+  <%= link_to "Create New", new_item_path %>
 </div>
 
 <div id="filters">
-  <%= form_with model: @categories.first do |form| %>
+  <%= form_with model: @categories.first, 
+      data: {
+        controller: "item-filter", 
+        categories: @categories.collect{|x| x.id}.compact
+      } do |form| %>
     <fieldset>
-      <%= form.collection_radio_buttons :tag, @categories, :tag, :title %>
+      <%= form.collection_radio_buttons :id, @categories, :id, :title %>
     </fieldset>
   <% end %>
 </div>
 
-<div id="items">
-  <% @items.each_slice(3) do |group| %>
-    <div class="grid">
-      <%= render group[0] %>
-
-      <% if group[1] %>
-        <%= render group[1] %>
-      <% else %>
-        <div></div>
-      <% end %>
-
-      <% if group[2] %>
-        <%= render group[2] %>
-      <% else %>
-        <div></div>
-      <% end %>
-    </div>
+<div class="grid grid-items-index" id="items">
+  <% @items.each do |item| %>
+    <%= render item %>
   <% end %>
 </div>
 

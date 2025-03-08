@@ -37,7 +37,7 @@
 
     <article class="mb">
       <h3>Categories</h3>
-      <%= form.collection_checkboxes :categories, 
+      <%= form.collection_checkboxes :category_ids, 
         Category.order(:tag), :id, :title %>
     </article>
   </div>

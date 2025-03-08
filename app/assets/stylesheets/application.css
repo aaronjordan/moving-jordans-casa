@@ -77,6 +77,24 @@ form input.tight {
   margin-top: var(--pico-typography-spacing-vertical);
 }
 
+.hidden {
+  display: none;
+}
+
+div.grid-items-index {
+  grid-template-columns: repeat(1, minmax(0%, 1fr));
+}
+@media screen and (min-width: 768px) {
+  div.grid-items-index {
+    grid-template-columns: repeat(2, minmax(0%, 1fr));
+  }
+}
+@media screen and (min-width: 1280px) {
+  div.grid-items-index {
+    grid-template-columns: repeat(3, minmax(0%, 1fr));
+  }
+}
+
 .img-preview {
   display: inline-block;
   position: relative;

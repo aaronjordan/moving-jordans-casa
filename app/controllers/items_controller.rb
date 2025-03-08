@@ -4,7 +4,7 @@ class ItemsController < ApplicationController
 
   # GET /items or /items.json
   def index
-    @defaultFilter = Category.new(tag: "all", title: "All Items")
+    @defaultFilter = Category.new(tag: "all", title: "All Items", id: -1)
     @categories = [ @defaultFilter, *Category.all.order(:title) ]
     @items = Item.all
   end
@@ -64,14 +64,14 @@ class ItemsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_item
-      @item = Item.find(params.expect(:id))
+      @item = Item.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.
     def item_params
       params.expect(item: [
         :title, :draft, :suggested_price, :reserve_price, :desc,
-        :cover_image, images: []
+        :cover_image, images: [], category_ids: []
       ])
     end
 
