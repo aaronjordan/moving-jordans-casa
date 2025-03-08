@@ -81,6 +81,11 @@ form input.tight {
   display: none;
 }
 
+.max-md {
+  max-width: 1024px;
+  margin: auto;
+}
+
 div.grid-items-index {
   grid-template-columns: repeat(1, minmax(0%, 1fr));
 }
@@ -193,6 +198,7 @@ article.detail-view {
 
 .free {
   font-weight: 700;
+  color: var(--pico-color-pumpkin-200);
 }
 
 .subtle {

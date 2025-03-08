@@ -11,10 +11,10 @@
         <span class="tag pico-background-jade-300">Available</span>
       </div>
       <div class="flex-left">
-        <button class="icon">
-          <%= icon "link-simple" %>
+        <button class="icon" data-controller="popup" data-action="click->popup#openExternal">
+          <%= icon "arrow-square-out" %>
         </button>
-        <button class="icon">
+        <button class="icon" data-controller="popup" data-action="click->popup#close">
           <%= icon "x" %>
         </button>
       </div>
