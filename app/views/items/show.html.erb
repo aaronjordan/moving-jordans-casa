@@ -6,11 +6,13 @@
   </turbo-frame>
 </div>
 
-<div>
-  <%= link_to "Edit this item", edit_item_path(@item) %> |
-  <%= link_to "Back to items", items_path %>
+<% if Current.user.is_admin? %>
+  <div class="flex-left">
+    <%= link_to "Edit this item", edit_item_path(@item) %> |
+    <%= link_to "Back to items", items_path %>
 
-  <%= button_to "Destroy this item", 
-      @item, 
-      method: :delete, class: "destructive" %>
-</div>
+    <%= button_to "Destroy this item", 
+        @item, 
+        method: :delete, class: "destructive" %>
+  </div>
+<% end %>

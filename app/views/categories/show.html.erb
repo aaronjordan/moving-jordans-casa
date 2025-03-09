@@ -2,11 +2,13 @@
 
 <%= render @category %>
 
-<div>
-  <%= link_to "Edit this category", edit_category_path(@category) %> |
-  <%= link_to "Back to categories", categories_path %>
+<% if Current.user.is_admin? %>
+  <div class="flex-left">
+    <%= link_to "Edit this category", edit_category_path(@category) %> |
+    <%= link_to "Back to categories", categories_path %>
 
-  <%= button_to "Destroy this category", 
+    <%= button_to "Destroy this category", 
       @category,
       method: :delete, class: "destructive" %>
-</div>
+  </div>
+<% end %>

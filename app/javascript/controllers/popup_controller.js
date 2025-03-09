@@ -3,12 +3,14 @@ import { Controller } from "@hotwired/stimulus";
 export default class extends Controller {
   connect() {}
 
+  openNavigation() {
+    document.getElementById("navigation-menu").showModal();
+  }
+
   openExternal() {
     let e = this.element;
     while (e.parentElement) {
-      console.log(e.tagName);
       if (e.tagName === "TURBO-FRAME") {
-        console.log("gottem", e.src);
         window.open(e.src, "_blank");
         break;
       } else if (e.parentElement) {
@@ -21,11 +23,19 @@ export default class extends Controller {
     let e = this.element;
     while (e.parentElement) {
       if (e.tagName === "DIALOG") {
-        e.close();
+        this.closeGracefully(e);
         break;
       } else if (e.parentElement) {
         e = e.parentElement;
       }
     }
+  }
+
+  closeGracefully(dialog) {
+    dialog.classList.add("exit");
+    setTimeout(() => {
+      dialog.close();
+      dialog.classList.remove("exit");
+    }, 1000);
   }
 }

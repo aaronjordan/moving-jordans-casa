@@ -4,7 +4,9 @@
 
 <div class="flex-left mb">
   <h1>Categories</h1>
-  <%= link_to "Create New", new_category_path %>
+  <% if Current.user.is_admin? %>
+    <%= link_to "Create New", new_category_path %>
+  <% end %>
 </div>
 
 <div id="categories">

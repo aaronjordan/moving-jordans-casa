@@ -3,11 +3,13 @@
 <% content_for :title, "Items" %>
 
 <div class="flex-left mb">
-  <h1>Items</h1>
-  <%= link_to "Create New", new_item_path %>
+  <h1>Item Giveaways</h1>
+  <% if Current.user.is_admin? %>
+    <%= link_to "Create New", new_item_path %>
+  <% end %>
 </div>
 
-<div id="filters">
+<div id="filters" class="filter-bar">
   <%= form_with model: @categories.first, 
       data: {
         controller: "item-filter", 
@@ -17,6 +19,13 @@
       <%= form.collection_radio_buttons :id, @categories, :id, :title %>
     </fieldset>
   <% end %>
+  <span class="pip">|</span>
+  <fieldset>
+    <input type="checkbox" name="showAvailable" id="showAvailable" 
+           data-controller="item-filter" 
+           data-action="change->item-filter#toggleAvailable" />
+    <label for="showAvailable">Only show available items</label>
+  </fieldset>
 </div>
 
 <div class="grid grid-items-index" id="items">

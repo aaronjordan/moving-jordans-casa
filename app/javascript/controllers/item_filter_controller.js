@@ -7,6 +7,8 @@ export default class extends Controller {
   categoryToItems = {};
 
   connect() {
+    if (this.element.tagName !== "FORM") return;
+
     this.detectCategories();
     this.recordItems();
     this.element.addEventListener("change", (e) => this.onCategoryUpdated(e));
@@ -45,5 +47,28 @@ export default class extends Controller {
         item.classList.add("hidden");
       }
     }
+
+    placeEmptyStateIfEmpty();
+  }
+
+  toggleAvailable(e) {
+    const items = Array.from(
+      document.getElementById("items").querySelectorAll("article")
+    );
+
+    for (const item of items) {
+      const available = item.dataset.available;
+      if (available !== "true" && e.target.checked) {
+        item.classList.add("hidden-av");
+      } else {
+        item.classList.remove("hidden-av");
+      }
+    }
+
+    placeEmptyStateIfEmpty();
+  }
+
+  placeEmptyStateIfEmpty() {
+    console.log("NYI: empty");
   }
 }

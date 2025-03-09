@@ -4,7 +4,9 @@
 
 <div class="flex-left mb">
   <h1>Events</h1>
-  <%= link_to "Create New", new_event_path %>
+  <% if Current.user.is_admin? %>
+    <%= link_to "Create New", new_event_path %>
+  <% end %>
 </div>
 
 <%# https://dribbble.com/shots/18706766-Evently-A-Calendar-UI-Exploration %>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_03_08_183636) do
+ActiveRecord::Schema[8.0].define(version: 2025_03_09_035223) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -57,6 +57,16 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_08_183636) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "claim_events", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "item_id", null: false
+    t.boolean "released"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["item_id"], name: "index_claim_events_on_item_id"
+    t.index ["user_id"], name: "index_claim_events_on_user_id"
+  end
+
   create_table "events", force: :cascade do |t|
     t.string "title"
     t.datetime "start_time"
@@ -85,8 +95,30 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_08_183636) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "sessions", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.string "ip_address"
+    t.string "user_agent"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_sessions_on_user_id"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "email_address", null: false
+    t.string "password_digest", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "is_admin"
+    t.string "display_name"
+    t.index ["email_address"], name: "index_users_on_email_address", unique: true
+  end
+
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "claim_events", "items"
+  add_foreign_key "claim_events", "users"
   add_foreign_key "item_categories", "categories"
   add_foreign_key "item_categories", "items"
+  add_foreign_key "sessions", "users"
 end

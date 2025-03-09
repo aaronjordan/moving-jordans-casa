@@ -1,0 +1,40 @@
+<div class="readable">
+
+  <h1 class="font-bold text-4xl">Create an Account</h1>
+
+  <%= form_with model: @user, url: registrations_url, class: "contents" do |form| %>
+    <div>
+      <%= form.email_field :email_address, required: true, autocomplete: "username", placeholder: "Enter your email address", value: params[:email_address], class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" %>
+    </div>
+
+    <div>
+      <%= form.text_field :display_name, required: true, autofocus: true, placeholder: "Choose a display name", value: params[:email_address], class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" %>
+    </div>
+
+    <div>
+      <%= form.password_field :password, required: true, autocomplete: "current-password", placeholder: "Choose your password", maxlength: 72, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" %>
+    </div>
+
+    <div>
+      <%= form.password_field :password_confirmation, required: true, autocomplete: "current-password", placeholder: "Confirm your password", maxlength: 72, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" %>
+    </div>
+
+    <div class="mb">
+      <%= recaptcha_tags callback: "onRecaptchaValidated" %>
+    </div>
+
+    <%= tag.article(flash[:alert], style: "color:red") if flash[:alert] %>
+    <%= tag.article(flash[:notice], style: "color:green") if flash[:notice] %>
+
+    <div>
+      <div data-tooltip="Please complete the ReCaptcha above before submitting" style="border: none">
+        <%= form.submit "Create Account", disabled: true, data: {controller: "recaptcha"} %>
+      </div>
+
+      <div class="flex-left">
+        <%= link_to "Sign In", new_session_path %>
+      </div>
+    </div>
+
+  <% end %>
+</div>
