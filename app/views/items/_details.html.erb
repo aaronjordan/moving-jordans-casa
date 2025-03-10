@@ -1,6 +1,6 @@
 <article class="detail-view" id="<%= dom_id item %>">
   <header>
-    <% if item.cover_image %>
+    <% if item.cover_image.present? %>
       <%= image_tag item.cover_image, {class: "gallery-img", size: "756x640"} %>
     <% end%>
   </header>

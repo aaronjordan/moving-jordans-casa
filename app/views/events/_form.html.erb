@@ -37,6 +37,18 @@
     <%= form.text_field :address %>
   </div>
 
+  <article>
+    <h3>Cover Image</h3>
+    <% if event.cover_image.present? %>
+      <div class="img-preview mb" style="max-width: 300px">
+        <%= image_tag event.cover_image %>
+      </div>
+    <% else %>
+      <p class="ml">No image</p>
+    <% end %>
+    <%= form.file_field :cover_image, class: "tight" %>
+  </article>
+
   <article class="trix-container" data-theme="light">
     <%= form.label :desc, style: "display: block" %>
     <%= form.rich_textarea :desc %>

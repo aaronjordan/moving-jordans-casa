@@ -1,27 +1,17 @@
-<div id="<%= dom_id event %>">
-  <p>
-    <strong>Title:</strong>
-    <%= event.title %>
-  </p>
-
-  <p>
-    <strong>Desc:</strong>
-    <%= event.desc %>
-  </p>
-
-  <p>
-    <strong>Start time:</strong>
-    <%= event.start_time %>
-  </p>
-
-  <p>
-    <strong>End time:</strong>
-    <%= event.end_time %>
-  </p>
-
-  <p>
-    <strong>Location:</strong>
-    <%= event.location %>
-  </p>
-
+<div class="cover">
+  <% if event.cover_image.present? %>
+    <%= image_tag event.cover_image, { size: "756x640"} %>
+  <% end %>
+</div>
+<div>
+  <%= link_to event do %>
+    <h2><%= event.title %></h2>
+  <% end %>
+  <div><%= event.start_local.strftime("%A %B %d, %Y") %></div>
+  <div>
+    <%= event.start_local.strftime("%l:%M%P") %>
+    <% if event.end_time %>
+      – <%= event.end_local.strftime("%l:%M%P").strip %>
+    <% end %>
+  </div>
 </div>

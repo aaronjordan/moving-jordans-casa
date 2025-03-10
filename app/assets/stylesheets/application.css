@@ -305,3 +305,20 @@ button.icon {
   width: unset;
   margin-bottom: 0;
 }
+
+.event-card {
+  gap: var(--pico-spacing);
+}
+
+.event-card .cover {
+  width: 120px;
+  max-width: 120px;
+}
+
+.event-card img {
+  width: 100%;
+}
+
+.event-solo .grid > * {
+  margin-block: auto;
+}

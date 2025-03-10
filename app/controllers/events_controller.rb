@@ -3,7 +3,7 @@ class EventsController < ApplicationController
 
   # GET /events or /events.json
   def index
-    @events = Event.all
+    @events = Event.all.order(:start_time)
   end
 
   # GET /events/1 or /events/1.json
@@ -22,7 +22,6 @@ class EventsController < ApplicationController
   # POST /events or /events.json
   def create
     @event = Event.new(event_params)
-
     respond_to do |format|
       if @event.save
         format.html { redirect_to @event, notice: "Event was successfully created." }
@@ -65,6 +64,32 @@ class EventsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def event_params
-      params.expect(event: [ :title, :desc, :start_time, :end_time, :location, :address ])
+      values = params.expect(event: [ :title, :desc, :start_time, :end_time, :location, :address, :cover_image ])
+      cast_to_utc values
+      values
+    end
+
+    def cast_to_utc(values)
+      if values[:start_time].present?
+        latest = Time.zone.parse(values[:start_time])
+        unless latest == @event&.start_time
+          logger.info "casting time to UTC from CT #{values[:start_time]}"
+          as_offset = latest.change(offset: ActiveSupport::TimeZone["US/Central"])
+          as_utc = as_offset.utc
+          logger.info "saving shifted time as #{as_utc}"
+          values[:start_time] = as_utc
+        end
+      end
+
+      if values[:end_time].present?
+        latest = Time.zone.parse(values[:end_time])
+        unless latest == @event.end_time
+          logger.info "casting time to UTC from CT #{values[:end_time]}"
+          as_offset = latest.change(offset: ActiveSupport::TimeZone["US/Central"])
+          as_utc = as_offset.utc
+          logger.info "saving shifted time as #{as_utc}"
+          values[:end_time] = as_utc
+        end
+      end
     end
 end

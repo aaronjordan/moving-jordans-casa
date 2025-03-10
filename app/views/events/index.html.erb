@@ -12,9 +12,8 @@
 <%# https://dribbble.com/shots/18706766-Evently-A-Calendar-UI-Exploration %>
 <div id="events">
   <% @events.each do |event| %>
-    <%= render event %>
-    <p>
-      <%= link_to "Show this event", event %>
-    </p>
+    <article id="<%= dom_id event %>" class="event-card flex-left">
+      <%= render event %>
+    </article>
   <% end %>
 </div>

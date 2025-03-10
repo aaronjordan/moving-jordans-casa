@@ -1,12 +1,17 @@
 <p style="color: green"><%= notice %></p>
 
-<%= render @event %>
+<article class="event-solo readable">
+  <section class="grid">
+    <%= render @event %>
+  </section>
+  <%= render partial: "event_details", locals: {event: @event} %>
 
-<% if Current.user.is_admin? %>
-  <div class="flex-left">
-    <%= link_to "Edit this event", edit_event_path(@event) %> |
-    <%= link_to "Back to events", events_path %>
+  <% if Current.user.is_admin? %>
+    <div class="flex-left mt">
+      <%= link_to "Edit this event", edit_event_path(@event) %> |
+      <%= link_to "Back to events", events_path %>
 
-    <%= button_to "Destroy this event", @event, method: :delete %>
-  </div>
-<% end %>
+      <%= button_to "Destroy this event", @event, method: :delete %>
+    </div>
+  <% end %>
+</article>

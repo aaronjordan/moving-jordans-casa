@@ -1,0 +1,13 @@
+<section>
+  <% if event.address.present? %>
+    <blockquote>
+      <strong><%= event.location %></strong>
+      <div>
+        <%= link_to "https://maps.google.com/?q=#{event.address}" do %>
+          <%= event.address %>
+        <% end %>
+      </div>
+    </blockquote>
+  <% end %>
+  <%= event.desc %>
+</section>
