@@ -409,7 +409,6 @@ DEPENDENCIES
   brakeman
   capybara
   debug
-  dotenv
   hotwire-spark
   image_processing (~> 1.2)
   importmap-rails
