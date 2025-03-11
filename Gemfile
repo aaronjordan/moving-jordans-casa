@@ -70,3 +70,5 @@ end
 gem "rails_icons", "~> 1.2"
 
 gem "recaptcha"
+
+gem "aws-sdk-s3"
