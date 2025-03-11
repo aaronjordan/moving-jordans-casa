@@ -1,6 +1,6 @@
 class Item < ApplicationRecord
   has_rich_text :desc
-  has_many :item_categories
+  has_many :item_categories, dependent: :destroy
   has_many :categories, through: :item_categories
   has_one_attached :cover_image
   has_many_attached :images
