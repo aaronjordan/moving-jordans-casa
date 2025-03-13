@@ -19,6 +19,10 @@ default: &default
   # https://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
 
+sqlite: &sqlite
+  adapter: sqlite3
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %> 
+  timeout: 5000
 
 development:
   <<: *default
@@ -81,18 +85,16 @@ test:
 production:
   primary: &primary_production
     <<: *default
-    database: moving_jordans_casa_production
-    username: moving_jordans_casa
-    password: <%= ENV["MOVING_JORDANS_CASA_DATABASE_PASSWORD"] %>
+    database: moving_jordans_casa 
   cache:
-    <<: *primary_production
-    database: moving_jordans_casa_production_cache
+    <<: *sqlite
+    database: storage/moving_jordans_casa_production_cache.sqlite3
     migrations_paths: db/cache_migrate
   queue:
-    <<: *primary_production
-    database: moving_jordans_casa_production_queue
+    <<: *sqlite
+    database: storage/moving_jordans_casa_production_queue.sqlite3
     migrations_paths: db/queue_migrate
   cable:
-    <<: *primary_production
-    database: moving_jordans_casa_production_cable
+    <<: *sqlite
+    database: storage/moving_jordans_casa_production_cable.sqlite3
     migrations_paths: db/cable_migrate

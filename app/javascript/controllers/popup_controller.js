@@ -36,6 +36,6 @@ export default class extends Controller {
     setTimeout(() => {
       dialog.close();
       dialog.classList.remove("exit");
-    }, 1000);
+    }, 500);
   }
 }

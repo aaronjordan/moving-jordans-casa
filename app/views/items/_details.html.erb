@@ -8,7 +8,11 @@
     <div class="flex-between">
       <div class="flex-left">
         <h1><%= item.title %></h1>
-        <span class="tag pico-background-jade-300">Available</span>
+        <% if item.is_available? %>
+          <span class="tag pico-background-jade-300">Available</span>
+        <% else %>
+          <span class="tag pico-background-grey-300">Unavailable</span>
+        <% end %>
       </div>
       <div class="flex-left">
         <button class="icon" data-controller="popup" data-action="click->popup#openExternal">
@@ -29,7 +33,6 @@
           <small class="subtle">(please take it)</small>
         <% end %>
       </div>
-      <%= button_to "Claim item" %>
     </div>
     <p class="tight"><%= item.desc %></p>
   </section>

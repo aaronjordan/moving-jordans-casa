@@ -22,7 +22,8 @@ class RegistrationsController < ApplicationController
       start_new_session_for @user
       redirect_to root_path, notice: "Successfully signed up!"
     else
-      render :new
+      flash[:alert] = "Could not validate ReCaptcha"
+      render :new, status: :bad_request
     end
   end
 

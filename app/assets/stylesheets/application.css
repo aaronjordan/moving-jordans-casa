@@ -163,6 +163,10 @@ div.grid-items-index {
   margin-bottom: calc(0.5 * var(--pico-spacing));
 }
 
+.shop-card header a {
+  display: contents;
+}
+
 .shop-card:hover .cover {
   transform: scale(1.8) translateY(10%);
   opacity: 0.3;
@@ -266,7 +270,7 @@ button.icon {
   align-items: stretch;
   opacity: 1;
   transform: translateX(0);
-  transition: transform 1s ease;
+  transition: transform 0.5s ease;
 }
 
 .exit .navigation-slideout {
@@ -280,6 +284,21 @@ button.icon {
 
   .navigation-slideout {
     transform: translateX(calc(-1 * var(--slideout-width)));
+  }
+}
+
+dialog#popup-details {
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+dialog.exit#popup-details {
+  opacity: 0;
+}
+
+@starting-style {
+  dialog#popup-details {
+    opacity: 0;
   }
 }
 
