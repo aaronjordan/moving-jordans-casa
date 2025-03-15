@@ -12,8 +12,19 @@
 @import url("pico.colors.css");
 @import url("pico.pumpkin.css");
 
+html {
+  height: 100%;
+}
+
 body {
   overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+main {
+  flex-grow: 1;
 }
 
 /* PICOFIX */
@@ -340,4 +351,9 @@ dialog.exit#popup-details {
 
 .event-solo .grid > * {
   margin-block: auto;
+}
+
+svg.inline {
+  width: 1.25rem;
+  margin-top: -0.2rem;
 }

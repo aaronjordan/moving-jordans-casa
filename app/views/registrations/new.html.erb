@@ -20,15 +20,15 @@
     </div>
 
     <div class="mb">
-      <%= recaptcha_tags callback: "onRecaptchaValidated" %>
+      <%= cloudflare_turnstile %>
     </div>
 
     <%= tag.article(flash[:alert], style: "color:red") if flash[:alert] %>
     <%= tag.article(flash[:notice], style: "color:green") if flash[:notice] %>
 
     <div>
-      <div data-tooltip="Please complete the ReCaptcha above before submitting" style="border: none">
-        <%= form.submit "Create Account", disabled: true, data: {controller: "recaptcha"} %>
+      <div>
+        <%= form.submit "Create Account" %>
       </div>
 
       <div class="flex-left">

@@ -20,6 +20,9 @@
     <%# Includes all stylesheet files in app/assets/stylesheets %>
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+
+    <%# Cloudflare's improvement on ReCaptcha %>
+    <%= cloudflare_turnstile_script_tag %>
   </head>
 
   <body>
@@ -48,20 +51,24 @@
         </aside>
       </dialog>
     <% end %>
-    <header>
-      <div class="flex-between container">
-        <div class="flex-left" style="gap: 16px">
-          <% if authenticated? %>
-            <button class="icon" data-controller="popup" data-action="click->popup#openNavigation">
-              <%= icon "caret-double-right" %>
-            </button>
-          <% end %>
-          <h1 class="site-title" style="margin-bottom: 10px"><%= link_to "moving.jordans.casa", root_path %></h1>
-        </div>
+    <header class="flex-between container">
+      <div class="flex-left" style="gap: 16px">
+        <% if authenticated? %>
+          <button class="icon" data-controller="popup" data-action="click->popup#openNavigation">
+            <%= icon "caret-double-right" %>
+          </button>
+        <% end %>
+        <h1 class="site-title" style="margin-bottom: 10px"><%= link_to "moving.jordans.casa", root_path %></h1>
       </div>
     </header>
     <main class="container">
       <%= yield %>
     </main>
+    <footer class="grid container">
+      <small style="text-align: center; color: var(--pico-color-grey-250)">
+        <div style="font-style: italic;">Made with <%= icon "heart", variant: "fill", class: "inline pico-color-pumpkin-350" %> by Aaron</div>
+        <div class="mt mb"><a href="" class="secondary">Check it out on GitHub!</a></div>
+      </small>
+    </footer>
   </body>
 </html>

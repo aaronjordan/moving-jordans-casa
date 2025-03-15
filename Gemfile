@@ -74,6 +74,8 @@ end
 
 gem "rails_icons", "~> 1.2"
 
-gem "recaptcha"
+gem "rails_cloudflare_turnstile"
+
+gem "sendgrid-actionmailer"
 
 gem "aws-sdk-s3", require: false

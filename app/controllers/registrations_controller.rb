@@ -1,5 +1,7 @@
 class RegistrationsController < ApplicationController
+  rescue_from RailsCloudflareTurnstile::Forbidden, with: :validate_failed_error
   allow_unauthenticated_access only: %i[ new create ]
+  before_action :validate_cloudflare_turnstile, only: %i[create]
 
   def index
     redirect_to root_path
@@ -18,7 +20,7 @@ class RegistrationsController < ApplicationController
       return
     end
 
-    if verify_recaptcha(model: @user) && @user.save
+    if @user.save
       start_new_session_for @user
       redirect_to root_path, notice: "Successfully signed up!"
     else
@@ -42,6 +44,10 @@ class RegistrationsController < ApplicationController
     end
   end
 
+  def validate_failed_error
+    flash[:alert] = "Could not validate Cloudflare Turnstile"
+    render :new, status: :bad_request
+  end
 
   private
 
