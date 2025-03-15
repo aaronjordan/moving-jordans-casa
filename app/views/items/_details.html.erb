@@ -24,16 +24,37 @@
       </div>
     </div>
     <div class="flex-between claim-controller">
-      <div class="cost flex-left">
-        <% if (item.suggested_price || 0) > 0 %>
-          <%= "$%.2f" % item.suggested_price %>
-          <small class="subtle">(suggested donation)</small>
-        <% else %>
-          <span class="free">FREE</span>
-          <small class="subtle">(please take it)</small>
+      <% if item.is_available? %>
+        <div class="cost flex-left">
+          <% if (item.suggested_price || 0) > 0 %>
+            <%= "$%.2f" % item.suggested_price %>
+            <small class="subtle">(suggested donation)</small>
+          <% else %>
+            <span class="free">FREE</span>
+            <small class="subtle">(please take it)</small>
+          <% end %>
+        </div>
+      <% elsif @user_claimed_this_item %>
+        <div>
+          <h2>Congrats! 🎉</h2>
+          <p>It's all yours.</p>
+        </div>
+      <% else %>
+        Someone else already claimed this item.
+      <% end %>
+      <div>
+        <% if @user_claimed_this_item %>
+          <%= button_to "Release item", 
+              release_path(@item),
+              method: :post, class: "destructive" %>
+        <% elsif item.is_available? %>
+          <%= button_to "Claim item", 
+              claim_path(@item),
+              method: :post %>
         <% end %>
       </div>
     </div>
+    <hr />
     <p class="tight"><%= item.desc %></p>
   </section>
 </article>

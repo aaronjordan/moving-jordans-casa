@@ -1,0 +1,25 @@
+  
+<h1>Recent Events</h1>
+<% @claims.each do |claim| %>
+  <article>
+    <details class="log-event" data-released="<%= claim.released %>">
+      <summary >
+        <h2 style="margin-bottom: 0;">
+          <%= claim.item.title %>
+          <% if claim.released %>
+            released by
+          <% else %>
+            claimed by
+          <% end %>
+          <span class="username">
+            @<%= claim.user.display_name %>
+          </span>
+        </h2>
+      </summary>
+      <p>Claimed at: <%= claim.created_at %></p>
+      <% if claim.created_at != claim.updated_at %>
+        <p>Modified: <%= claim.updated_at %></p>
+      <% end %>
+    </details>
+  </article>
+<% end %>

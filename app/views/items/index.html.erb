@@ -8,6 +8,18 @@
     <%= link_to "Create New", new_item_path %>
   <% end %>
 </div>
+<article>
+  <details class="tight">
+    <summary style="font-size: 1.125rem">How does this work? 🤔</summary>
+    <p>
+      We're looking to give away these items to friends who can arrange 
+      <strong>an Austin-based pickup</strong> either at one of our 
+      <a href="/events">Events</a> or at an alternative meetup before <strong>March 23</strong>.
+      We'll be in touch after your claim to finalize details, <em>but feel free
+        to reach out directly to us if you're really excited.</em> 🤠
+    </p>
+  </details>
+</article>
 
 <div id="filters" class="filter-bar">
   <%= form_with model: @categories.first, 

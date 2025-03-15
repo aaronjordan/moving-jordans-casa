@@ -1,5 +1,7 @@
 class EventsController < ApplicationController
   before_action :set_event, only: %i[ show edit update destroy ]
+  before_action :protected_action, only: %i[ create update destroy ]
+  before_action :protected_view, only: %i[ new edit ]
 
   # GET /events or /events.json
   def index

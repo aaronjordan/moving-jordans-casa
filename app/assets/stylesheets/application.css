@@ -357,3 +357,18 @@ svg.inline {
   width: 1.25rem;
   margin-top: -0.2rem;
 }
+
+.log-event {
+  margin-bottom: 0;
+}
+
+.log-event summary {
+  display: flex;
+  width: 100%;
+  align-items: center;
+}
+
+.log-event[data-released="true"] * {
+  color: var(--pico-color-grey-600);
+  background: none;
+}

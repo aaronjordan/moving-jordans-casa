@@ -2,9 +2,15 @@ Rails.application.routes.draw do
   resource :session
   resources :passwords, param: :token
   resources :events
+
+  get "/items/claims", to: "items#claims"
+  post "/items/claim/:id", to: "items#claim", as: "claim"
+  post "/items/release/:id", to: "items#release", as: "release"
   resources :items
+
   resources :categories
   resource :registrations
+
   get "/home", to: "home#index"
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

@@ -1,5 +1,7 @@
 class CategoriesController < ApplicationController
   before_action :set_category, only: %i[ show edit update destroy ]
+  before_action :protected_action, only: %i[ create update destroy ]
+  before_action :protected_view, only: %i[ new edit ]
 
   # GET /categories or /categories.json
   def index

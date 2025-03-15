@@ -1,6 +1,8 @@
 class ItemsController < ApplicationController
-  before_action :set_item, only: %i[ show edit update destroy ]
-  # before_action :resize_all_images, only: %i[ create update ]
+  before_action :set_item, only: %i[ show edit update destroy claim release ]
+  before_action :protected_action, only: %i[ create update destroy ]
+  before_action :protected_view, only: %i[ new edit claims ]
+
 
   # GET /items or /items.json
   def index
@@ -12,6 +14,12 @@ class ItemsController < ApplicationController
   # GET /items/1 or /items/1.json
   def show
     @categories = Category.all
+    @active_claims = ClaimEvent.where(item_id: @item.id).where.not(released: true).order(created_at: :desc)
+    @user_claimed_this_item = false
+
+    if authenticated?
+      @user_claimed_this_item = @active_claims.exists?(user_id: Current.user.id)
+    end
   end
 
   # GET /items/new
@@ -59,6 +67,36 @@ class ItemsController < ApplicationController
       format.html { redirect_to items_path, status: :see_other, notice: "Item was successfully destroyed." }
       format.json { head :no_content }
     end
+  end
+
+  def claims
+    @claims = ClaimEvent.all.order(created_at: :desc)
+  end
+
+
+  def claim
+    if authenticated?
+      claim = ClaimEvent.new
+      claim.user_id = Current.user.id
+      claim.item_id = @item.id
+      claim.released = false
+      claim.save
+      ClaimEventMailer.success_notification(claim).deliver_later
+      flash["success"] = "Item claimed."
+      redirect_to @item
+    else
+      redirect_to new_session_path
+    end
+  end
+
+  def release
+    if authenticated?
+      claim = ClaimEvent.find_by(item_id: @item.id, user_id: Current.user.id, released: false)
+      claim.released = true
+      claim.save
+      flash["success"] = "Item released."
+    end
+    redirect_to @item
   end
 
   private
