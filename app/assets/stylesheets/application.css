@@ -210,7 +210,12 @@ button.icon {
   display: inline-flex;
   padding: calc(0.25 * var(--pico-spacing));
   width: calc(2 * var(--pico-spacing));
+  height: calc(2 * var(--pico-spacing));
   border-radius: var(--pico-border-radius);
+}
+
+button.icon svg {
+  width: 100%;
 }
 
 .gallery-img {
