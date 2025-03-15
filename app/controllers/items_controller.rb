@@ -8,7 +8,7 @@ class ItemsController < ApplicationController
   def index
     @defaultFilter = Category.new(tag: "all", title: "All Items", id: -1)
     @categories = [ @defaultFilter, *Category.all.order(:title) ]
-    @items = Item.all
+    @items = Item.all.order(created_at: :desc)
   end
 
   # GET /items/1 or /items/1.json
