@@ -28,12 +28,14 @@
   </article>
 
   <article>
-    <h3>Newsletter</h3>
+    <div class="flex-between mb">
+      <h3 class="tight">Newsletter</h3>
+      <%= render partial: "subscriptions/subscribe_cta" %>
+    </div>
     <p>
       Interested in keeping up with us post-move? Join our newsletter and we'll
       offer you all sorts of updates in the future.
     </p>
-    <p>(This link doesn't go anywhere yet but it's totally going to get made...)</p>
     <%= link_to "Check it out", root_path %>
   </article>
 </div>

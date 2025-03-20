@@ -1,0 +1,17 @@
+<turbo-frame id="subscribe-cta">
+  <% if Subscription.exists?(user: Current.user) %>
+    <%= button_to [:unsubscribe], 
+              class: "outline secondary flex-between", 
+              style: "gap: 6px" do %>
+      <%= icon "check" %>
+      Subscribed
+    <% end %>
+  <% else %>
+    <%= button_to [:subscribe], 
+              class: "flex-between", 
+              style: "gap: 6px" do %>
+      <%= icon "plus" %>
+      Subscribe
+    <% end %>
+  <% end %>
+</turbo-frame>
