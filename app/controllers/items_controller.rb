@@ -8,7 +8,10 @@ class ItemsController < ApplicationController
   def index
     @defaultFilter = Category.new(tag: "all", title: "All Items", id: -1)
     @categories = [ @defaultFilter, *Category.all.order(:title) ]
-    @items = Item.all.order(created_at: :desc)
+    @all_items =  Item.all.order(created_at: :desc)
+    @available = @all_items.select { |i| i.is_available? }
+    @claimed = @all_items.select { |i| !i.is_available? }
+    @items = @available + @claimed
   end
 
   # GET /items/1 or /items/1.json
